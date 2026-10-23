@@ -1,0 +1,9 @@
+build/
+build-*/
+simulation.csv
+*.exe
+*.obj
+*.o
+*.pdb
+*.ilk
+*.log

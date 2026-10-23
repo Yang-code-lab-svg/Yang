@@ -1,0 +1,41 @@
+name: Build and test standard C
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  cmake:
+    name: ${{ matrix.os }} CMake
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v7
+      - name: Configure
+        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+      - name: Build
+        run: cmake --build build --config Release
+      - name: Test
+        run: ctest --test-dir build -C Release --output-on-failure
+      - name: Upload simulation CSV
+        uses: actions/upload-artifact@v7
+        with:
+          name: simulation-${{ matrix.os }}
+          path: build/simulation.csv
+          if-no-files-found: error
+  windows-batch:
+    name: Windows batch (MSVC)
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Build, test and run with the documented batch file
+        shell: cmd
+        run: |
+          for /f "usebackq tokens=*" %%i in (`"%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\vswhere.exe" -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath`) do call "%%i\VC\Auxiliary\Build\vcvars64.bat"
+          if errorlevel 1 exit /b 1
+          call build_windows.bat msvc

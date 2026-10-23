@@ -1,0 +1,47 @@
+[PASS] startup command changes exactly at 2 seconds
+[PASS] reversal command changes exactly at 60 seconds
+[PASS] stop command changes exactly at 95 seconds
+[PASS] filter startup uses one available sample
+[PASS] filter startup uses two available samples
+[PASS] five samples produce mean 30
+[PASS] sixth sample evicts oldest sample
+[PASS] filter handles negative values and repeated wraparound
+[PASS] filter reset discards old history
+[PASS] PI integral includes 0.05-second sample period
+[PASS] zero error retains integral effort
+[PASS] positive command is limited to +0.04 Nm
+[PASS] positive saturation does not accumulate integral
+[PASS] negative command is limited to -0.04 Nm
+[PASS] negative saturation does not accumulate integral
+[PASS] controller leaves saturation when error is removed
+[PASS] opposite error can reduce existing integral effort
+[PASS] constant torque obeys angular momentum balance
+[PASS] rad/s-to-rpm conversion has correct scale
+[PASS] 60 rpm equals 2*pi rad/s
+[PASS] sub-threshold torque cannot overcome static friction
+[PASS] sufficient negative torque starts negative rotation
+[PASS] unpowered friction stops the wheel without reversing it
+[PASS] friction also stops negative rotation
+Scenario: noise off
+[PASS] 120 seconds contain exactly 2400 control updates at 20 Hz
+[PASS] all samples are finite and motor torque stays within limits
+[PASS] large speed step exercises output saturation
+[PASS] startup settles within 1 rpm before disturbance
+[PASS] increased friction causes a visible transient speed drop
+[PASS] PI restores speed after friction increase
+[PASS] steady motor torque rises by approximately 0.006 Nm
+[PASS] controller reaches negative speed after command reversal
+[PASS] last five seconds remain within 1 rpm of rest
+Evidence: pre=1000.527975 rpm, dip=990.835342 rpm, recovered=999.991051 rpm, torque_delta=0.006074708 Nm, reverse=-499.705088 rpm, stop_peak=0.000000 rpm
+Scenario: noise on
+[PASS] 120 seconds contain exactly 2400 control updates at 20 Hz
+[PASS] all samples are finite and motor torque stays within limits
+[PASS] large speed step exercises output saturation
+[PASS] startup settles within 1 rpm before disturbance
+[PASS] increased friction causes a visible transient speed drop
+[PASS] PI restores speed after friction increase
+[PASS] steady motor torque rises by approximately 0.006 Nm
+[PASS] controller reaches negative speed after command reversal
+[PASS] last five seconds remain within 1 rpm of rest
+Evidence: pre=1000.525874 rpm, dip=990.826903 rpm, recovered=999.987802 rpm, torque_delta=0.006002170 Nm, reverse=-499.708327 rpm, stop_peak=0.000000 rpm
+42 checks, 0 failures

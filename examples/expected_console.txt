@@ -1,0 +1,18 @@
+Reaction wheel speed-control simulation (synthetic data only)
+Control: 20 Hz; dt: 0.050 s; filter: 5 samples; noise: on
+ time_s  target_rpm    true_rpm  filtered_rpm  motor_torque_Nm
+   0.00        0.00       0.000         0.600        -0.000303
+  10.00     1000.00     571.407       564.476         0.040000
+  20.00     1000.00    1004.271      1004.254         0.004023
+  30.00     1000.00    1000.394      1000.273         0.004108
+  40.00     1000.00     998.417       998.487         0.010254
+  50.00     1000.00     999.894       999.852         0.010130
+  60.00     -500.00     999.994      1000.075        -0.040000
+  70.00     -500.00      62.142        71.237        -0.040000
+  80.00     -500.00    -478.219      -477.027        -0.014399
+  90.00     -500.00    -499.114      -499.116        -0.009160
+ 100.00        0.00     -45.838       -52.137         0.021461
+ 110.00        0.00       0.000         0.120        -0.001703
+Completed: 2400 ticks, 120.00 s simulated; final speed: 0.000000 rpm
+Peak |motor torque|: 0.040000 Nm; saturated ticks: 701
+CSV: build/simulation.csv
